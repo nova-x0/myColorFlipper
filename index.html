@@ -42,6 +42,7 @@
         <div class="share-buttons">
             <a href="#" id="facebook-share"><i class="fab fa-facebook"></i> Share on Facebook</a>
             <a href="#" id="twitter-share"><i class="fab fa-twitter"></i> Share on Twitter</a>
+
         </div>
     </main>
 </body>
@@ -159,6 +160,34 @@
         style.color = color;
         return style.color !== "";
     }
+
+
+
+
+
+
+
+
+
+    const facebookShareButton = document.getElementById("facebook-share");
+    const twitterShareButton = document.getElementById("twitter-share");
+
+    // Define the URLs you want to share
+    const shareUrl = "https://your-website.com"; // Replace with your website URL
+
+    // Share on Facebook
+    facebookShareButton.addEventListener("click", () => {
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+        window.open(facebookUrl, "_blank");
+    });
+
+    // Share on Twitter
+    twitterShareButton.addEventListener("click", () => {
+        const tweetText = "Check out this cool color: " + color.textContent; // Customize the text
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(twitterUrl, "_blank");
+    });
+
 
 
 </script>
@@ -494,7 +523,8 @@ Container
     input[type="text"] {
         height: 50px;
     }
-    input[type="text"]::placeholder{
+
+    input[type="text"]::placeholder {
         letter-spacing: 3px;
         padding-left: 30px;
     }

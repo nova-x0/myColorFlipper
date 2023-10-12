@@ -188,6 +188,17 @@
         window.open(twitterUrl, "_blank");
     });
 
+    
+
+copyBtn.addEventListener("click", () => {
+    copyToClipboard();
+    copyBtn.classList.add("copy-animation"); // Add the animation class
+
+    // Remove the animation class after a certain time (1s in this case)
+    setTimeout(() => {
+        copyBtn.classList.remove("copy-animation");
+    }, 1000); // Adjust the time to match your animation duration
+});
 
 
 </script>
@@ -528,4 +539,21 @@ Container
         letter-spacing: 3px;
         padding-left: 30px;
     }
+
+
+
+    /* Add an animation to the "Copy" icon */
+#copy-btn.copy-animation {
+    animation: pulse 1s ease infinite; /* You can adjust the animation duration and other properties as needed */
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
 </style>

@@ -190,15 +190,15 @@
 
 
 
-copyBtn.addEventListener("click", () => {
-    copyToClipboard();
-    copyBtn.classList.add("copy-animation"); // Add the animation class
+    copyBtn.addEventListener("click", () => {
+        copyToClipboard();
+        copyBtn.classList.add("copy-animation"); // Add the animation class
 
-    // Remove the animation class after a certain time (1s in this case)
-    setTimeout(() => {
-        copyBtn.classList.remove("copy-animation");
-    }, 1000); // Adjust the time to match your animation duration
-});
+        // Remove the animation class after a certain time (1s in this case)
+        setTimeout(() => {
+            copyBtn.classList.remove("copy-animation");
+        }, 1000); // Adjust the time to match your animation duration
+    });
 
 
 </script>
@@ -432,15 +432,23 @@ Container
 
     .container {
         text-align: center;
+        margin-top: 30px;
     }
 
     .container h2,
-    .history>h3 {
+    .history>h3,
+    #history-list,
+    .share-buttons {
         background: var(--clr-black);
         color: var(--clr-white);
         padding: 1rem;
         border-radius: var(--radius);
         margin-bottom: 2.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .share-buttons>a {
+        color: var(--clr-white);
     }
 
     .color {
@@ -476,6 +484,7 @@ Container
     .share-buttons {
         display: flex;
         gap: 40px;
+        margin-top: 30px;
     }
 
     .container-nd-history {
@@ -504,7 +513,7 @@ Container
     }
 
     .history-scroll::-webkit-scrollbar-thumb {
-        background: #ddd;
+        background: #222;
         border-radius: 10px;
     }
 
@@ -543,17 +552,20 @@ Container
 
 
     /* Add an animation to the "Copy" icon */
-#copy-btn.copy-animation {
-    animation: pulse 1s ease infinite; /* You can adjust the animation duration and other properties as needed */
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
+    #copy-btn.copy-animation {
+        animation: pulse 1s ease infinite;
+        /* You can adjust the animation duration and other properties as needed */
     }
-    50% {
-        transform: scale(1.2);
-    }
-}
 
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+    }
 </style>

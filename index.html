@@ -18,7 +18,7 @@
         </div>
     </nav>
     <div class="input-container">
-        <input type="text" id="color-input" placeholder="#______">
+        <input type="text" id="color-input" placeholder="eg. #______">
         <button class="btn btn-hero" id="apply-color">Apply Color</button>
     </div>
 
@@ -27,16 +27,19 @@
         <div class="container-nd-history">
             <div class="container">
                 <h2>Background Color: <span class="color">#f1f5f8</span></h2>
-                <button class="btn btn-hero" id="btn">Generate Color</button>
+                <button class="btn btn-hero" id="btn">
+                    Generate Color
+                    <i class="fas fa-paint-brush"></i>
+                </button>
                 <i class="fa-regular fa-copy" id="copy-btn"></i>
             </div>
             <div class="history">
                 <h3>Color History</h3>
 
+                <div class="history-scroll">
+                    <ul id="history-list"></ul>
+                </div>
                 <button class="btn-clear-history" id="clear-history">Clear History</button>
-            </div>
-            <div class="history-scroll">
-                <ul id="history-list"></ul>
             </div>
         </div>
         <div class="share-buttons">
@@ -113,10 +116,29 @@
     }
 
     function addToHistoryList(hexColor) {
-        const li = document.createElement("li");
-        li.textContent = hexColor;
-        historyList.appendChild(li);
-    }
+    const li = document.createElement("li");
+    li.textContent = hexColor;
+
+    const copyButton = document.createElement("button");
+    // Remove the text content from the button
+    copyButton.textContent = "Copy";
+    copyButton.classList.add("copy-color-btn");
+    copyButton.addEventListener("click", function () {
+        copyToClipboard(hexColor);
+    });
+
+    li.appendChild(copyButton);
+    historyList.appendChild(li);
+}
+
+function copyToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+}
 
     function clearHistory() {
         localStorage.removeItem("colorHistory");
@@ -136,6 +158,9 @@
         historyList.style.display = "block";
 
     })
+    clearHistoryButton.addEventListener("click", function () {
+        historyList.style.display = "none";
+    })
 
 
     const applyColorButton = document.getElementById("apply-color");
@@ -154,6 +179,14 @@
             alert("Invalid color code or name. Please enter a valid color.");
         }
     }
+
+    
+applyColorButton.addEventListener("click", applyUserColor);
+colorInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        applyUserColor();
+    }
+});
 
     function isValidColor(color) {
         const style = new Option().style;
@@ -446,7 +479,7 @@ Container
         margin-bottom: 2.5rem;
         margin-bottom: 2.5rem;
     }
-    
+
     .share-buttons>a {
         color: var(--clr-white);
     }
@@ -481,6 +514,10 @@ Container
         background: var(--clr-black);
     }
 
+    #clear-history {
+        margin-top: 30px;
+    }
+
     .share-buttons {
         display: flex;
         gap: 40px;
@@ -510,11 +547,11 @@ Container
 
     .history-scroll::-webkit-scrollbar {
         width: 12px;
+
     }
 
     .history-scroll::-webkit-scrollbar-thumb {
         background: #222;
-        border-radius: 10px;
     }
 
     .history-scroll::-webkit-scrollbar-thumb:hover {
@@ -522,7 +559,6 @@ Container
     }
 
     .history-scroll::-webkit-scrollbar-track {
-        border-radius: 10px;
         background-color: transparent;
     }
 
@@ -541,13 +577,27 @@ Container
     }
 
     input[type="text"] {
-        height: 50px;
+    height: 50px;
+    background: #222;
+    color: #fff;
+
+    }
+
+    input[type="text"]:focus {
+        outline: 2px solid #222;
     }
 
     input[type="text"]::placeholder {
+        color: #fff;
         letter-spacing: 3px;
         padding-left: 30px;
     }
+
+    input[type="text"] {
+        caret-color: #fff;
+
+    }
+
 
 
 
@@ -556,6 +606,28 @@ Container
         animation: pulse 1s ease infinite;
         /* You can adjust the animation duration and other properties as needed */
     }
+
+
+
+
+    .copy-color-btn {
+        color: black;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0.25rem 0.5rem;
+    margin-left: 1rem;
+    border-radius: var(--radius);
+    font-size: 0.75rem;
+
+}
+
+
+.copy-color-btn:hover {
+    background: var(--clr-primary-5);
+    color: var(--clr-black);
+}
+
 
     @keyframes pulse {
 

@@ -292,7 +292,7 @@ Container
     .container-nd-history {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         gap: 50px;
         flex-wrap: wrap;
     }
@@ -303,6 +303,9 @@ Container
 
     .history {
         overflow: hidden;
+        justify-content: center;
+    display: flex;
+    flex-direction: column;
     }
 
     .history-scroll {
@@ -391,6 +394,10 @@ Container
 .copy-color-btn:hover {
     background: var(--clr-primary-5);
     color: var(--clr-black);
+}
+
+#auto-color-change{
+    margin-top: 30px;
 }
 
 
